@@ -6,14 +6,11 @@ Telegram Server Manager Bot - Safe &amp; Easy run command in your RaspberryPi, P
  Source: [Your first bot from python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
  
  2 . First install some dependencies:
- ```bash
-  sudo pip install -r requirements.txt
-  ```
   Best way is use Virtualenv:
   ```bash
   virtualenv -p python3 .env
   source .env/bin/activate
-  pip install requirements.txt
+  pip install -r requirements.txt
   ```
   Install these package for using htop command:
   #### In debian base:
@@ -30,27 +27,20 @@ Telegram Server Manager Bot - Safe &amp; Easy run command in your RaspberryPi, P
   ```
  
  3. After create your bot and get your Token from botFather, send some text(more than two message) to your bot and use this command to find your chat_id:
-  ```bash
-  curl -X POST https://api.telegram.org/bot[YOUR-TOKEN]/getUpdates
-  ```
-  example:
-  ```bash
-  curl -X POST https://api.telegram.org/bot193025875:AAHZ3hIanIau-Hg04B-mZREFBjLl6GvM9fk/getUpdates
-  ```
-  Output:
-  ```
-  {"ok":true,"result":[{"update_id":124681718,
-"message":{"message_id":2888,"from":{"id":131728488,"is_bot":false,"first_name":"Mohammad","last_name":"Parvin","username":"mmparvin","language_code":"en-US"},"chat":{"id":131728488,"first_name":"Mohammad","last_name":"Parvin","username":"mmparvin","type":"private"},"date":1523988641,"text":"HHHHHHHHHHH"}}]}
-  ```
+  use @userinfobot bot to get your chat_id by sending /start to bot. 
 Put your chat_id and Token(in step1) in config.
- 3. Make executable tsmb.py file:
- ```bash
- chmod +x tsmb.py
- ```
+
  4. Run file:
  ```bash
- ./tsmb.py
+ python bot.py
  ```
+ 
+ 5. Send you command:
+  send any command you want like:
+  ```bash
+ ps -aux
+ ```
+ 
 ## Sample of htop output:
 To get a snapshot of htop, send `/htop` command to bot, output will be like this:
 

@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Apr  4 19:06:08 2018
-
-@author: mparvin
-"""
-
 import subprocess
 import configparser
 import os
@@ -35,10 +27,21 @@ def runCMD(bot, update):
     )
     cmdOut, cmdErr = cmdProc.communicate()
     if cmdOut:
-        bot.sendMessage(text=str(cmdOut, "utf-8"), chat_id=adminCID)
+        chunk_size=4000
+        if len(cmdOut)>chunk_size:
+            cmdOut = [ cmdOut[i:i+chunk_size] for i in range(0, len(cmdOut), chunk_size) ]
+            for message in cmdOut:
+                bot.sendMessage(text=str(message, "utf-8"), chat_id=adminCID)
+        else:
+            bot.sendMessage(text=str(cmdOut, "utf-8"), chat_id=adminCID)
     else:
-        bot.sendMessage(text=str(cmdErr, "utf-8"), chat_id=adminCID)
-
+        chunk_size=4000
+        if len(cmdErr)>chunk_size:
+            cmdErr = [ cmdErr[i:i+chunk_size] for i in range(0, len(cmdErr), chunk_size) ]
+            for message in cmdErr:
+                bot.sendMessage(text=str(message, "utf-8"), chat_id=adminCID)
+        else:
+            bot.sendMessage(text=str(cmdErr, "utf-8"), chat_id=adminCID)
 
 ### This function ping 8.8.8.8 and send you result
 def ping8(bot, update):
